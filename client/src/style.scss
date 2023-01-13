@@ -1,0 +1,73 @@
+$lightGreen: #b9e7e7;
+
+.app{
+    display: flex;
+    justify-content: center;
+    .container{
+
+        width: 1024px;
+
+        //Login
+        //Register
+
+        .auth{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: $lightGreen;
+
+            h1{
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            form{
+                display: flex;
+                flex-direction: column;
+                padding:50px;
+                width: 200px;
+                gap: 20px;
+                background-color: white;
+            }
+
+            input{
+                padding:5px;
+                border:none;
+                border-bottom: 1px solid grey;
+            }
+
+            button{
+                background-color: teal;
+                padding: 10px;
+                border:none;
+                cursor: pointer;
+                color: white
+            }
+
+            p{
+                color: red;
+                font-size: 12px;
+            }
+
+            span{
+                font-size: 12px;
+                text-align: center;
+            }
+        }
+
+        //NAVBAR
+
+        .navbar{
+            .container{
+                padding: 10px 0 px;
+                display: flex;
+                justify-content: space-between;
+                .logo{}
+                .links{}
+            }
+        }
+
+    }
+}
