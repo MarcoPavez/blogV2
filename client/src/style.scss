@@ -7,6 +7,11 @@ $lightGreen: #b9e7e7;
 
         width: 1024px;
 
+        .link{
+            text-decoration: none;
+            color:inherit;
+        }
+
         //Login
         //Register
 
@@ -63,9 +68,96 @@ $lightGreen: #b9e7e7;
             .container{
                 padding: 10px 0 px;
                 display: flex;
+                align-items: center;
                 justify-content: space-between;
-                .logo{}
-                .links{}
+                .logo{
+                    img{
+                        width: 120px;
+                    }
+                }
+                .links{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    h6{
+                        font-size: 16px;
+                        font-weight: 300;
+                    }
+
+                    span{
+                        cursor: pointer
+                    }
+
+                    .write{
+
+                        &:hover{
+
+                        }
+                        
+                        background-color: $lightGreen;
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: 300;
+                        border: 1px solid white
+
+    
+                    }
+
+                    
+                }
+            }
+        }
+
+
+        //FOOTER
+
+        footer{
+            margin-top: 100px;
+            padding: 20px;
+            background-color: $lightGreen;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-style: 12px;
+            img{
+                height: 50px;
+            }
+        }
+
+        //HOME
+
+        .home{
+
+            .posts{
+                margin-top: 50px;
+                display: flex;
+                flex-direction: column;
+                gap: 150px;
+
+                .post{
+                    display: flex;
+                    gap: 100px;
+
+&:nth-child()
+
+
+                    .img{
+                        flex: 2;
+
+                        img{
+                            width: 100%;
+                        }
+                    }
+
+                    .content {
+                        flex: 3
+                    }
+                }
             }
         }
 
