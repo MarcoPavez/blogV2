@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 
 const Register = () => {
   //Luego de crear rutas y controladores, creamos las constantes que permitirán retener los datos ingresados por el usuario
@@ -11,9 +12,25 @@ const Register = () => {
     password: "",
   });
 
+  const [err,setErr] = useState(null)
+  
+  const navigate = useNavigate()
+  
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try{
+
+      await axios.post("/auth/register", inputs)
+      navigate("/login")
+    }catch(err){
+
+      setErr(err.response.data)
+    }
+  }
 
   return (
     <div className="auth">
@@ -40,8 +57,8 @@ const Register = () => {
           name="password"
           onChange={handleChange}
         ></input>
-        <button>Register</button>
-        <p>El usuario y/o contraseña son incorrectos</p>
+        <button onClick={handleSubmit}>Register</button>
+        {err && <p>{err}</p>}
         <span>
           ¿Ya tienes una cuenta? <Link to="/login">Ingresa aquí</Link>
         </span>

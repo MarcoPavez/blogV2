@@ -1,15 +1,43 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import axios from 'axios'
 
 const Login = () => {
+
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [err,setErr] = useState(null)
+  
+  const navigate = useNavigate()
+  
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    try{
+
+      await axios.post("/auth/login", inputs)
+      navigate("/")
+    }catch(err){
+
+      setErr(err.response.data)
+    }
+  }
+
   return (
     <div className='auth'>
       <h1>Login</h1>
       <form>
-        <input required type="text" placeholder='Nombre de usuario'></input>
-        <input required type="password" placeholder='Contraseña'></input>
-        <button>Login</button>
-        <p>El usuario y/o contraseña son incorrectos</p>
+        <input required type="text" placeholder='Nombre de usuario' name="username" onChange={handleChange}></input>
+        <input required type="password" placeholder='Contraseña' name="password" onChange={handleChange}></input>
+        <button onClick={handleSubmit}>Login</button>
+        {err && <p>{err}</p>}
         <span>¿No tienes una cuenta? <Link to="/register">Regístrate</Link></span>
       </form>
       </div>
