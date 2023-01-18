@@ -308,12 +308,13 @@ $lightGreen: #b9e7e7;
 
         input{
           padding: 10px;
-          border: 1px solid lightgrey;
+          border: 1px solid lightgray;
         }
 
         .editorContainer{
           height: 300px;
           overflow: scroll;
+          border: 1px solid lightgray;
 
           .editor{
             height: 100%;
@@ -368,6 +369,13 @@ $lightGreen: #b9e7e7;
               padding: 3px 5px;
               
             }
+          }
+
+          .cat{
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            color: teal;
           }
 
 

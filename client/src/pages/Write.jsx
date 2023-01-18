@@ -14,7 +14,7 @@ const Write = () => {
             theme="snow"
             value={value}
             onChange={setValue}
-          />
+          /> 
         </div>
       </div>
       <div className="menu">
@@ -35,23 +35,25 @@ const Write = () => {
         </div>
         <div className="item">
           <h1>Categoría</h1>
+          <div className="cat">
           <input type="radio" name="cat" value="art" id="art"></input>
-          <label htmlFor="art">Arte</label>
+          <label htmlFor="art">Arte</label></div>
+          <div className="cat">
           <input type="radio" name="cat" value="science" id="science"></input>
-          <label htmlFor="art">Ciencia</label>
-          <input
-            type="radio"
-            name="cat"
-            value="technology"
-            id="technology"
+          <label htmlFor="art">Ciencia</label></div>
+          <div className="cat">
+          <input type="radio" name="cat" value="technology" id="technology"
           ></input>
-          <label htmlFor="art">Tecnología</label>
+          <label htmlFor="art">Tecnología</label></div>
+          <div className="cat">
           <input type="radio" name="cat" value="cinema" id="cinema"></input>
-          <label htmlFor="art">Cine</label>
+          <label htmlFor="art">Cine</label></div>
+          <div className="cat">
           <input type="radio" name="cat" value="design" id="design"></input>
-          <label htmlFor="art">Diseño</label>
+          <label htmlFor="art">Diseño</label></div>
+          <div className="cat">
           <input type="radio" name="cat" value="food" id="food"></input>
-          <label htmlFor="art">Comida</label>
+          <label htmlFor="art">Comida</label></div>
         </div>
       </div>
     </div>
