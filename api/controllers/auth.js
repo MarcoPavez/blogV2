@@ -1,6 +1,6 @@
 import { db } from "../db.js"
 import bcrypt from "bcryptjs"
-
+import jwt from "jsonwebtoken"
 
 export const register = (req,res) => {
     // CHECK si el usuario ya existe
@@ -53,7 +53,14 @@ export const login = (req,res) => {
 
         if(!isPasswordCorrect) return res.status(400).json("Usuario y/o contraseña incorrectos")
 
+        //COMPRUEBA SI EL TOKEN DEL USUARIO ES EL MISMO TOKEN DEL POST, COMPRUEBA QUE POSTS
+        //PERTENECEN REALMENTE AL USUARIO, ASI NO SE EDITAN O ELIMINAN POST AJENOS
+        const token = jwt.sign({id:data[0].id}, "jwtkey");
+        const {password, ...other} = data[0]
 
+        res.cookie("acces_token", token, {
+            httpOnly:true
+        }).status(200).json(other)
     })
 }
 
