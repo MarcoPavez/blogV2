@@ -66,4 +66,9 @@ export const login = (req,res) => {
 
 export const logout = (req,res) => {
     
+res.clearCookie("acces_token",{
+    sameSite:"none",
+    secure:true
+}).status(200).json("Usuario ha cerrado sesión")
+
 }

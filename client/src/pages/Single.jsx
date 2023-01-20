@@ -1,13 +1,37 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Menu from "../components/Menu"
+import React, {useEffect, useState} from "react";
+import { Link, useLocation } from "react-router-dom";
+import Menu from "../components/Menu";
+import axios from "axios";
+import moment from "moment"
+import { useContext } from "react";
+import {AuthContext} from "../context/authContext.js"
 
 const Single = () => {
+  const [post, setPost] = useState({});
+
+  const location = useLocation()
+
+  const postId = location.pathname.split("/")[2]
+
+  const {currentUser} = useContext(AuthContext)
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/posts${postId}`);
+        setPost(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, [postId]);
+
   return (
     <div className="single">
       <div className="content">
         <img
-          src="https://i.imgur.com/swzokWj_d.webp?maxwidth=520&shape=thumb&fidelity=high"
+          src={post?.img}
           alt=""
         />
         <div className="user">
@@ -16,20 +40,27 @@ const Single = () => {
             alt=""
           />
           <div className="info">
-            <span>John</span>
-            <p>Publicado hace 2 días</p>
+            <span>{post.username}</span>
+            <p>Publicado {moment(post.date).fromNow()}</p>
           </div>
-          <div className="edit">
+          {currentUser.username === post.username && (<div className="edit">
             <Link to={`/write?edit=2`}>
-            <img src="/" alt=""/>
+              <img src="/" alt="" />
             </Link>
-            <img src="/" alt=""/>
+            <img src="/" alt="" />
+            
           </div>
+          )}
         </div>
-        <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa quae, quo autem labore odio nemo consectetur aspernatur! Architecto deserunt enim corrupti, porro asperiores sit facere iusto iure non quod maiores!</h1>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum rem, itaque voluptas repellat quos quas ratione mollitia expedita maiores veritatis ab dicta perferendis vero libero quo voluptate sint eius odit.</p>
+          
+        <h1>
+          {post.title}
+        </h1>
+       
+          {post.desc}
+       
       </div>
-      <Menu/>
+      <Menu />
     </div>
   );
 };

@@ -1,8 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import axios from "axios"
 
 const Home = () => {
-  const posts = [
+
+  const [posts, setPosts] = useState([])
+
+  const cat = useLocation().search
+
+  useEffect (() => {
+    const fetchData = async () => {
+
+      try{
+        const res = await axios.get(`/posts${cat}`);
+        setPosts(res.data)
+      }catch(err){
+        console.log(err)
+      }
+    };
+    fetchData();
+  }, [cat])
+  /* const posts = [
     {
       id: 1,
       title: "AAA",
@@ -27,7 +45,7 @@ const Home = () => {
       desc: "asdjasj",
       img: "https://i.imgur.com/l5p0pZi_d.webp?maxwidth=520&shape=thumb&fidelity=high",
     },
-  ];
+  ]; */
 
   return (
     <div className="home">
