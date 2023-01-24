@@ -29,10 +29,12 @@ export const AuthContextProvider = ({ children }) => {
 
   //¿como cambiamos el localStorage de la consola del navegador cada vez que cambiamos de usuario?
   useEffect(() => {
-    localStorage.setItem("user", JSON.stringify(currentUser))
+    localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
 
-  return <AuthContext.Provider value={{currentUser, login, logout}}>
-    {children}
-  </AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={{ currentUser, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
