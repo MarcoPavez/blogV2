@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
 import axios from "axios";
 import moment from "moment";
+import { useContext } from "react";
 import { AuthContext } from "../context/authContext.js";
 import editarIcono from "../img/editarIcono.jpg"
 import eliminarIcono from "../img/eliminarIcono.jpg"
@@ -41,7 +42,7 @@ const Single = () => {
   return (
     <div className="single">
       <div className="content">
-        <img src={post.img} alt="" />
+        <img src={post?.img} alt="" />
         <div className="user">
           <img
             src="https://i.imgur.com/swzokWj_d.webp?maxwidth=520&shape=thumb&fidelity=high"
@@ -53,7 +54,7 @@ const Single = () => {
           </div>
           {currentUser.username === post.username && (
             <div className="edit">
-              <Link to={`/write?edit=2`}>
+              <Link to={`/write?edit=2`} state={post}>
                 <img src={editarIcono} alt="" />
               </Link>
               <img onClick={handleDelete} src={eliminarIcono} alt="" />

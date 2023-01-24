@@ -14,7 +14,7 @@ export const getPosts = (req,res) => {
 }
 
 export const getPost = (req,res) => {
-    const q = "SELECT `username`, `title`, `desc`, p.`img`, `cat`, `date` FROM users u JOIN posts p ON u.id = p.userid WHERE p.userid = ?"
+    const q = "SELECT p.id, `username`, `title`, `desc`, `img`, `cat`, `date` FROM users u JOIN posts p ON u.id = p.userid WHERE p.userid = ?"
 
     db.query(q, [req.params.id], (err,data) => {
         if (err) return res.status(500).json(err)
@@ -36,7 +36,7 @@ export const deletePost = (req,res) => {
         if(err) return res.status(403).json("Token inválido")
 
         const postId=req.params.id
-        const q = "DELETE FROM posts WHERE `id` = ? AND `uid` = ?"
+        const q = "DELETE FROM posts WHERE `id` = ? AND `userid` = ?"
 
         db.query(q,[postId,userInfo.id], (err,data) => {
             if(err) return res.status(403).json("Acción prohibida, no cuentas con los permisos necesarios")
