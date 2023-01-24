@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Link, Navigate, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
 import axios from "axios";
 import moment from "moment";
-import { AuthContext } from "../context/authContext";
+import { AuthContext } from "../context/authContext.js";
 import editarIcono from "../img/editarIcono.jpg"
 import eliminarIcono from "../img/eliminarIcono.jpg"
 
@@ -11,6 +11,7 @@ const Single = () => {
   const [post, setPost] = useState({});
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const postId = location.pathname.split("/")[2];
 
@@ -19,7 +20,7 @@ const Single = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/posts${postId}`);
+        const res = await axios.get(`/posts/${postId}`);
         setPost(res.data);
       } catch (err) {
         console.log(err);
@@ -31,7 +32,7 @@ const Single = () => {
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${postId}`);
-      Navigate("/")
+      navigate("/")
     } catch (err) {
       console.log(err)
     }
