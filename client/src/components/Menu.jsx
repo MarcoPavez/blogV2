@@ -48,7 +48,7 @@ const Menu = ({ cat }) => {
       <h1>Otras publicaciones que te pueden interesar</h1>
       {posts.map((post) => (
         <div className="post" key={post.id}>
-          <img src={post?.img} alt="Error al cargar imagen" />
+          <img src={`../upload/${post?.img}`} alt="Error al cargar imagen" />
           <h2>{post.title}</h2>
           <button>Leer más</button>
         </div>
