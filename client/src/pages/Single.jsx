@@ -5,8 +5,9 @@ import axios from "axios";
 import moment from "moment";
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext.js";
-import editarIcono from "../img/editarIcono.jpg"
-import eliminarIcono from "../img/eliminarIcono.jpg"
+import editarIcono from "../img/editarIcono.jpg";
+import eliminarIcono from "../img/eliminarIcono.jpg";
+import DOMPurify from "dompurify"
 
 const Single = () => {
   const [post, setPost] = useState({});
@@ -33,16 +34,16 @@ const Single = () => {
   const handleDelete = async () => {
     try {
       await axios.delete(`/posts/${postId}`);
-      navigate("/")
+      navigate("/");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <div className="single">
       <div className="content">
-        <img src={post?.img} alt="" />
+        <img src={`../upload/${post?.img}`} alt="" />
         <div className="user">
           <img
             src="https://i.imgur.com/swzokWj_d.webp?maxwidth=520&shape=thumb&fidelity=high"
@@ -64,9 +65,13 @@ const Single = () => {
 
         <h1>{post.title}</h1>
 
-        {post.desc}
+        <p
+          dangerouslySetInnerHTML={{
+            __html: DOMPurify.sanitize(post.desc),
+          }}
+        ></p>
       </div>
-      <Menu cat={post.cat}/>
+      <Menu cat={post.cat} />
     </div>
   );
 };
